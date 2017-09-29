@@ -5,6 +5,7 @@ var assert = require('assert');
 var FactParser = require('../../src/parser/factParser');
 
 describe('FactParser', function () {
+
     var factParser;
 
     beforeEach(function() {
@@ -12,6 +13,7 @@ describe('FactParser', function () {
     });
 
     describe('#validFact()', function () {
+        
         it('should return true when a valid fact is evaluated', function () {
             expect(factParser.validFact('male(seldon)')).to.be.true;
             expect(factParser.validFact('father(toran, arkady)')).to.be.true;
