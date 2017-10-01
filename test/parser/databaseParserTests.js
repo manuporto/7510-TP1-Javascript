@@ -3,6 +3,7 @@ var should = require('should');
 var assert = require('assert');
 
 var DatabaseParser = require('../../src/parser/databaseParser');
+var Database = require('../../src/entities/database');
 
 describe('DatabaseParser', function() {
 
@@ -44,4 +45,16 @@ describe('DatabaseParser', function() {
             expect(databaseParser.validDatabase(databaseWithInvalidRule)).to.be.false;
         })
     });
+
+    describe('#createDatabase()', function() {
+
+        it('should return a Database entity when a valid parsed database its evaluated', function() {
+            var createdDatabase = databaseParser.createDatabase(validDatabase);
+            expect(createdDatabase).to.be.an.instanceof(Database);
+            expect(createdDatabase.facts).to.have.lengthOf(4);
+            // expect(createdDatabase.factNames.values()).to.have.lengthOf(3);
+            expect(createdDatabase.rules).to.have.lengthOf(1);
+            // expect(createdDatabase.ruleNames.values()).to.have.lengthOf(1);
+        })
+    })
 });
