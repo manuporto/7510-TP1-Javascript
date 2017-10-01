@@ -3,6 +3,7 @@ var should = require('should');
 var assert = require('assert');
 
 var FactParser = require('../../src/parser/factParser');
+var Fact = require('../../src/entities/fact');
 
 describe('FactParser', function () {
 
@@ -25,4 +26,13 @@ describe('FactParser', function () {
             expect(factParser.validFact('father(toran,)')).to.be.false;
         })
     });
+
+    describe('#parseFact()', function() {
+
+        it.skip('should return a valid Fact when a, single argument, valid raw fact is parsed', function() {
+            var expectedFact = new Fact('male', ['seldon']);
+            var parsedFact = factParser.parseFact('male(seldon)');
+            expect(parsedFact).to.be.eql(expectedFact);
+        })
+    })
 });
