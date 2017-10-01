@@ -12,8 +12,9 @@ var FactParser = function() {
     };
 
     this.getFactArgs = function(fact) {
-        console.log(fact.substr(fact.indexOf(Lang.openArg++), fact.indexOf(Lang.closeArg)));
-        return fact.substr(fact.indexOf(Lang.openArg++), fact.indexOf(Lang.closeArg)).split(Lang.argSep);
+        return fact.substring(
+            fact.indexOf('(') + 1,
+            fact.indexOf(')')).split(', ');
     };
 
     this.parseFact = function(fact) {
