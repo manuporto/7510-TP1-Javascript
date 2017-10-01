@@ -8,6 +8,7 @@ var Lang = {
     customFactSep: '); ',
     factSep: '; ',
     validFactFormat: /^[a-z]+\(([a-z]+, )*[a-z]+\)\./,
+    validQueryFormat: /^[a-z]+\(([a-z]+, )*[a-z]+\)\./,
     validRuleFormat: /^[a-z]+\(([A-Z]+, )*[A-Z]+\) :- (([a-z]+\(([A-Z]+, )*[A-Z]+\)), )*([a-z]+\(([A-Z]+, )*[A-Z]+\))\./
 }
 
