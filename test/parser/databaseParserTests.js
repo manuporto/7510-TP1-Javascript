@@ -4,6 +4,7 @@ var assert = require('assert');
 
 var DatabaseParser = require('../../src/parser/databaseParser');
 var Database = require('../../src/entities/database');
+var InvalidDatabaseException = require('../../src/exceptions/invalidDatabaseException');
 
 describe('DatabaseParser', function() {
 
@@ -43,7 +44,7 @@ describe('DatabaseParser', function() {
         it('should return false when an invalid database its evaluated', function() {
             expect(databaseParser.validDatabase(databaseWithInvalidFact)).to.be.false;
             expect(databaseParser.validDatabase(databaseWithInvalidRule)).to.be.false;
-        })
+        });
     });
 
     describe('#createDatabase()', function() {
@@ -52,9 +53,16 @@ describe('DatabaseParser', function() {
             var createdDatabase = databaseParser.createDatabase(validDatabase);
             expect(createdDatabase).to.be.an.instanceof(Database);
             expect(createdDatabase.facts).to.have.lengthOf(4);
-            // expect(createdDatabase.factNames.values()).to.have.lengthOf(3);
+            expect(createdDatabase.factNames.size).to.be.equal(3);
             expect(createdDatabase.rules).to.have.lengthOf(1);
-            // expect(createdDatabase.ruleNames.values()).to.have.lengthOf(1);
-        })
-    })
+            expect(createdDatabase.ruleNames.size).to.be.equal(1);
+        });
+
+        it('should throw an InvalidDatabaseException exception when an invalid parsed database its evaluated', 
+        function() {
+            expect(databaseParser.createDatabase.bind(databaseParser, databaseWithInvalidFact))
+            .to.throw();
+            // .to.throw(new InvalidDatabaseException());
+        });
+    });
 });

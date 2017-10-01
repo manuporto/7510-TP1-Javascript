@@ -2,6 +2,7 @@ var Lang = require('../lang');
 var FactParser = require('./factParser');
 var RuleParser = require('./ruleParser');
 var Database = require('../entities/database');
+var InvalidDatabaseException = require('../exceptions/invalidDatabaseException');
 
 var DatabaseParser = function() {
     this.factParser = new FactParser();
@@ -15,7 +16,7 @@ var DatabaseParser = function() {
     };
 
     this.createDatabase = function(db) {
-        if (!this.validDatabase(db)) throw 'InvalidDatabaseException';
+        if (!this.validDatabase(db)) throw new InvalidDatabaseException();
         var facts = [];
         var factNames = new Set();
         var rules = [];
