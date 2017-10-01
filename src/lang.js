@@ -3,8 +3,10 @@ var Lang = {
     closeArg: ')',
     argSep: ', ',
     lineEnd: '.',
-    ruleEq: ':-',
-    factSep: ', ',
+    ruleEq: ':- ',
+    defFactSep: /\), /,
+    customFactSep: '); ',
+    factSep: '; ',
     validFactFormat: /^[a-z]+\(([a-z]+, )*[a-z]+\)\./,
     validRuleFormat: /^[a-z]+\(([A-Z]+, )*[A-Z]+\) :- (([a-z]+\(([A-Z]+, )*[A-Z]+\)), )*([a-z]+\(([A-Z]+, )*[A-Z]+\))\./
 }
