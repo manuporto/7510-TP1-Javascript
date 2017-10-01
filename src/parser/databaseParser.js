@@ -5,6 +5,7 @@ var Database = require('../entities/database');
 var InvalidDatabaseException = require('../exceptions/invalidDatabaseException');
 
 var DatabaseParser = function() {
+    
     this.factParser = new FactParser();
     this.ruleParser = new RuleParser();
     var self = this;
@@ -26,8 +27,8 @@ var DatabaseParser = function() {
                 facts.push(self.factParser.parseFact(line));
                 factNames.add(self.factParser.getFactName(line));
             } else {
-                rules.push('');
-                ruleNames.add('');
+                rules.push(self.ruleParser.getRuleName(line));
+                ruleNames.add(self.ruleParser.parseRule(line));
             };
         });
         return new Database(facts, factNames, rules, ruleNames);

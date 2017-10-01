@@ -52,7 +52,7 @@ describe('RuleParser', function() {
 
     describe('#parseRule()', function() {
 
-        it.only('should return a Rule entity when a raw rule it\'s parsed', function() {
+        it('should return a Rule entity when a raw rule it\'s parsed', function() {
             expect(ruleParser.parseRule(validRule))
             .to.eql(new Rule(
                 'son',
