@@ -24,7 +24,7 @@ describe('FactParser', function () {
             expect(factParser.validFact('male(seldon')).to.be.false;
             expect(factParser.validFact('male((seldon)')).to.be.false;
             expect(factParser.validFact('father(toran,)')).to.be.false;
-        })
+        });
     });
 
     describe('#parseFact()', function() {
@@ -33,6 +33,12 @@ describe('FactParser', function () {
             var expectedFact = new Fact('male', ['seldon']);
             var parsedFact = factParser.parseFact('male(seldon)');
             expect(parsedFact).to.be.eql(expectedFact);
-        })
-    })
+        });
+
+        it('should return a valid Fact when a, multiple argument, valid raw fact is parsed', function() {
+            var expectedFact = new Fact('father', ['toran', 'arkady']);
+            var parsedFact = factParser.parseFact('father(toran, arkady)');
+            expect(parsedFact).to.be.eql(expectedFact);
+        });
+    });
 });
