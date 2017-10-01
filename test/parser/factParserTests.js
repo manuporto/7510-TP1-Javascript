@@ -29,7 +29,7 @@ describe('FactParser', function () {
 
     describe('#parseFact()', function() {
 
-        it.skip('should return a valid Fact when a, single argument, valid raw fact is parsed', function() {
+        it('should return a valid Fact when a, single argument, valid raw fact is parsed', function() {
             var expectedFact = new Fact('male', ['seldon']);
             var parsedFact = factParser.parseFact('male(seldon)');
             expect(parsedFact).to.be.eql(expectedFact);
