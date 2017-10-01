@@ -3,6 +3,8 @@ var should = require('should');
 var assert = require('assert');
 
 var RuleParser = require('../../src/parser/ruleParser');
+var Rule = require('../../src/entities/rule');
+var Fact = require('../../src/entities/fact');
 
 describe('RuleParser', function() {
 
@@ -27,15 +29,39 @@ describe('RuleParser', function() {
     });
 
     describe('#getRuleName()', function() {
+
         it('should return the rule\'s name', function() {
             expect(ruleParser.getRuleName(validRule)).to.equal('son');
         });
     });
 
+    describe('#getRuleArgs()', function() {
+
+        it('should return the rule\'s arguments', function() {
+            expect(ruleParser.getRuleArgs(validRule)).to.eql(['X', 'Y']);
+        })
+    });
+
     describe('#getRuleFacts()', function() {
+
         it('should return rule\'s facts as an array of strings containing them', function() {
             expect(ruleParser.getRuleFacts(validRule))
             .to.eql(['male(X)', 'father(Y, X)']);
+        });
+    });
+
+    describe('#parseRule()', function() {
+
+        it.only('should return a Rule entity when a raw rule it\'s parsed', function() {
+            expect(ruleParser.parseRule(validRule))
+            .to.eql(new Rule(
+                'son',
+                ['X', 'Y'],
+                [
+                    (new Fact('male', ['X'])),
+                    (new Fact('father', ['Y', 'X']))
+                ]
+            ));
         });
     });
 });
