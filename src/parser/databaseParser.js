@@ -1,6 +1,7 @@
 var Lang = require('../lang');
 var FactParser = require('./factParser');
 var RuleParser = require('./ruleParser');
+var Database = require('../entities/database');
 
 var DatabaseParser = function() {
     this.factParser = new FactParser();
@@ -11,6 +12,24 @@ var DatabaseParser = function() {
         return !db.map(function(line) {
             return (self.factParser.validFact(line) || self.ruleParser.validRule(line));
         }).includes(false);
+    };
+
+    this.createDatabase = function(db) {
+        if (!this.validDatabase(db)) throw 'InvalidDatabaseException';
+        var facts = [];
+        var factNames = new Set();
+        var rules = [];
+        var ruleNames = new Set();
+        db.map(function(line) {
+            if (self.factParser.validFact(line)) {
+                facts.push(self.factParser.parseFact(line));
+                factNames.add(self.factParser.getFactName(line));
+            } else {
+                rules.push('');
+                ruleNames.add('');
+            };
+        });
+        return new Database(facts, factNames, rules, ruleNames);
     };
 };
 
