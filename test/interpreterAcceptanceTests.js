@@ -5,7 +5,7 @@ var assert = require('assert');
 var Interpreter = require('../src/interpreter');
 
 
-describe.skip("Interpreter", function () {
+describe("Interpreter", function () {
 
     var db = [
         "varon(juan).",
@@ -71,7 +71,7 @@ describe.skip("Interpreter", function () {
 
     });
 
-    describe('Interpreter Rules', function () {
+    describe.skip('Interpreter Rules', function () {
 
         it('hijo(pepe, juan) should be true', function () {
             assert(interpreter.checkQuery('hijo(pepe, juan)') === true);
