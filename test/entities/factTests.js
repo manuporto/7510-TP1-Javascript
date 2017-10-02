@@ -4,7 +4,7 @@ var assert = require('assert');
 
 var Fact = require('../../src/entities/fact');
 
-describe.only('Fact', function() {
+describe('Fact', function() {
 
     var originalFact = new Fact('father', ['onum', 'ducem']);
 

@@ -25,6 +25,7 @@ describe('QueryParser', function() {
     });
 
     describe('#parseQuery()', function() {
+        
         it('should return a Query entity', function() {
             expect(queryParser.parseQuery('male(seldon)')).to.eql(new Query('male', ['seldon']));
         });
