@@ -6,17 +6,22 @@ var Database = function(facts, factNames, rules, ruleNames) {
     this.rules = rules;
     this.ruleNames = ruleNames;
 
-    this.factExists = function(qfact) {
+    this.factExists = function(query) {
+        var qfact = new Fact(query.name, query.args);
         return this.facts.filter(function(fact) {
             return fact.equals(qfact);
         }).length > 0;
     };
 
+    this.ruleExists = function(qrule) {
+        return true;
+    };
+
     this.evaluateQuery = function(query) {
         if (this.factNames.has(query.name)) {
-            return this.factExists(new Fact(query.name, query.args));
+            return this.factExists(query);
         } else if (this.ruleNames.has(query.name)) {
-            return true;
+            return this.ruleExists(query);
         }
         return false;
     };
