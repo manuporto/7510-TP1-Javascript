@@ -1,3 +1,5 @@
+var zipObject = require('lodash/fp/zipObject');
+
 var Fact = require('./fact');
 
 var Database = function(facts, factNames, rules, ruleNames) {
@@ -13,7 +15,14 @@ var Database = function(facts, factNames, rules, ruleNames) {
         }).length > 0;
     };
 
-    this.ruleExists = function(qrule) {
+    this.ruleExists = function(query) {
+        var rule = this.rules.filter(function(rule) {
+            return rule.name === query.name;
+        })[0];
+        var mappedArgs = zipObject(rule.args, query.args);
+        // var facts = rule.facts.map(function(fact) {
+        //     return new Fact(fact.name, )
+        // });
         return true;
     };
 
