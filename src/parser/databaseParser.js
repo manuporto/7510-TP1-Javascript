@@ -27,8 +27,8 @@ var DatabaseParser = function() {
                 facts.push(self.factParser.parseFact(line));
                 factNames.add(self.factParser.getFactName(line));
             } else {
-                rules.push(self.ruleParser.getRuleName(line));
-                ruleNames.add(self.ruleParser.parseRule(line));
+                ruleNames.add(self.ruleParser.getRuleName(line));
+                rules.push(self.ruleParser.parseRule(line));
             };
         });
         return new Database(facts, factNames, rules, ruleNames);
