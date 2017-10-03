@@ -1,12 +1,14 @@
 var _ = require('lodash');
 
 var Fact = require('./fact');
+var Query = require('./query');
 
 var Database = function(facts, factNames, rules, ruleNames) {
     this.facts = facts;
     this.factNames = factNames;
     this.rules = rules;
     this.ruleNames = ruleNames;
+    var self = this;
 
     this.factExists = function(query) {
         var qfact = new Fact(query.name, query.args);
@@ -20,14 +22,16 @@ var Database = function(facts, factNames, rules, ruleNames) {
             return rule.name === query.name;
         })[0];
         var mappedArgs = _.zipObject(rule.args, query.args);
-        var facts = rule.facts.map(function(fact) {
+        var queries = rule.facts.map(function(fact) {
             var usedArgs = _.intersection(fact.args, rule.args);
             var matchedArgs = usedArgs.map(function(arg) {
                 return mappedArgs[arg];
             });
-            return new Fact(fact.name, matchedArgs);
+            return new Query(fact.name, matchedArgs);
         });
-        return true;
+        return !queries.map(function(query) {
+            return self.factExists(query);
+        }).includes(false);
     };
 
     this.evaluateQuery = function(query) {
